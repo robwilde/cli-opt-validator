@@ -1,8 +1,12 @@
 import argparse
 import subprocess
 import os
+from colorama import init, Fore
 
 def main():
+    # Initialize colorama
+    init()
+
     # Create a parser object
     parser = argparse.ArgumentParser(description='Validate .opt file with OperationalTemplateExtra.xsd schema using xmllint.')
     
@@ -29,7 +33,7 @@ def main():
         if process.returncode != 0:
             print(f'Error validating {opt_file}:\n{stderr.decode()}')
         else:
-            print(f'Successfully validated {opt_file}.')
+            print(f'{Fore.GREEN}Successfully validated {opt_file}.{Fore.RESET}\n')
 
 if __name__ == '__main__':
     main()
