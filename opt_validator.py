@@ -27,9 +27,9 @@ def main():
     passed_files = 0
     failed_files = 0
     
-    # If no opt_file argument is provided, search the root directory for .opt files
+    # If no opt_file argument is provided, search the templates directory for .opt files
     if args.opt_file is None:
-        opt_files = [f for f in os.listdir('.') if os.path.isfile(f) and f.endswith('.opt')]
+        opt_files = [f for f in os.listdir('templates') if os.path.isfile(f) and f.endswith('.opt')]
     else:
         opt_files = [args.opt_file]
     
