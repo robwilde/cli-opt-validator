@@ -16,6 +16,9 @@ def main():
     # Add an argument for the log file
     parser.add_argument('--log', type=str, nargs='?', default=None, help='The file to log validation errors.')
     
+    # Add an argument for the xsd file
+    parser.add_argument('--xsd', type=str, nargs='?', default='OperationalTemplateExtra.xsd', help='The xsd file to use for validation.')
+    
     # Parse the arguments
     args = parser.parse_args()
     
@@ -27,8 +30,8 @@ def main():
     
     # Loop through the .opt files and validate each one
     for opt_file in opt_files:
-        # Run the xmllint command
-        command = f'xmllint --noout --schema OperationalTemplateExtra.xsd {opt_file}'
+        # Run the xmllint command with the specified xsd file
+        command = f'xmllint --noout --schema {args.xsd} {opt_file}'
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         
