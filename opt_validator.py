@@ -36,7 +36,8 @@ def main():
     # Loop through the .opt files and validate each one
     for opt_file in opt_files:
         # Run the xmllint command with the specified xsd file
-        command = f'xmllint --noout --schema {args.xsd} {opt_file}'
+        # Include the templates directory in the command
+        command = f'xmllint --noout --schema {args.xsd} templates/{opt_file}'
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         
