@@ -21,6 +21,11 @@ def main():
     
     # Parse the arguments
     args = parser.parse_args()
+
+    # Initialize counters
+    total_files = 0
+    passed_files = 0
+    failed_files = 0
     
     # If no opt_file argument is provided, search the root directory for .opt files
     if args.opt_file is None:
@@ -35,15 +40,23 @@ def main():
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         
-        # Print the output of the xmllint command and log errors if necessary
+        # Print the output of the xmllint command, log errors if necessary, and update counters
+        total_files += 1
         if process.returncode != 0:
             error_message = f'{Fore.RED}Error validating {opt_file}:\n{stderr.decode()}{Fore.RESET}\n'
             print(error_message)
+            failed_files += 1
             if args.log is not None:
                 with open(args.log, 'a') as log_file:
                     log_file.write(error_message)
         else:
             print(f'{Fore.GREEN}Successfully validated {opt_file}.{Fore.RESET}\n')
+            passed_files += 1
 
 if __name__ == '__main__':
     main()
+
+    # Print the counts of total, passed, and failed files
+    print(f'Total files validated: {total_files}')
+    print(f'Files passed validation: {passed_files}')
+    print(f'Files failed validation: {failed_files}')
