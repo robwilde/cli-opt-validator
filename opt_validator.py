@@ -53,10 +53,10 @@ def main():
             print(f'{Fore.GREEN}Successfully validated {opt_file}.{Fore.RESET}\n')
             passed_files += 1
 
-if __name__ == '__main__':
-    main()
-
     # Print the counts of total, passed, and failed files
     print(f'Total files validated: {total_files}')
     print(f'Files passed validation: {passed_files}')
     print(f'Files failed validation: {failed_files}')
+
+if __name__ == '__main__':
+    main()
