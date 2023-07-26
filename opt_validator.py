@@ -13,6 +13,9 @@ def main():
     # Add an argument for the .opt file
     parser.add_argument('opt_file', type=str, nargs='?', help='The .opt file to validate.')
     
+    # Add an argument for the log file
+    parser.add_argument('--log', type=str, nargs='?', default=None, help='The file to log validation errors.')
+    
     # Parse the arguments
     args = parser.parse_args()
     
@@ -29,9 +32,13 @@ def main():
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         
-        # Print the output of the xmllint command
+        # Print the output of the xmllint command and log errors if necessary
         if process.returncode != 0:
-            print(f'{Fore.RED}Error validating {opt_file}:\n{stderr.decode()}{Fore.RESET}\n')
+            error_message = f'{Fore.RED}Error validating {opt_file}:\n{stderr.decode()}{Fore.RESET}\n'
+            print(error_message)
+            if args.log is not None:
+                with open(args.log, 'a') as log_file:
+                    log_file.write(error_message)
         else:
             print(f'{Fore.GREEN}Successfully validated {opt_file}.{Fore.RESET}\n')
 
