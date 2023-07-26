@@ -31,7 +31,7 @@ def main():
         
         # Print the output of the xmllint command
         if process.returncode != 0:
-            print(f'Error validating {opt_file}:\n{stderr.decode()}')
+            print(f'{Fore.RED}Error validating {opt_file}:\n{stderr.decode()}{Fore.RESET}\n')
         else:
             print(f'{Fore.GREEN}Successfully validated {opt_file}.{Fore.RESET}\n')
 
