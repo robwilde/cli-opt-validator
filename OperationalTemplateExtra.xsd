@@ -356,6 +356,7 @@
             <xs:element name="magnitude" type="IntervalOfReal" minOccurs="0"/>
             <xs:element name="precision" type="IntervalOfInteger" minOccurs="0"/>
             <xs:element name="units" type="xs:string"/>
+            <!--elements added based on the DV_QUANTITY attributes https://specifications.openehr.org/releases/RM/latest/data_types.html#_dv_quantity_class-->
             <xs:element name="units_system" type="xs:string" minOccurs="0"/>
             <xs:element name="units_display_name" type="xs:string" minOccurs="0"/>
         </xs:sequence>
