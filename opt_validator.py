@@ -20,6 +20,9 @@ def main():
     # Add an argument for the xsd file
     parser.add_argument('--xsd', type=str, nargs='?', default='OperationalTemplateExtra.xsd', help='The xsd file to use for validation.')
     
+    # Add an argument for the folder containing .opt files
+    parser.add_argument('--folder', type=str, nargs='?', default=None, help='The folder containing .opt files to validate.')
+    
     # Parse the arguments
     args = parser.parse_args()
 
@@ -28,8 +31,11 @@ def main():
     passed_files = 0
     failed_files = 0
     
+    # If folder argument is provided, search the specified directory for .opt files
+    if args.folder is not None:
+        opt_files = [f for f in os.listdir(args.folder) if os.path.isfile(os.path.join(args.folder, f)) and f.endswith('.opt')]
     # If no opt_file argument is provided, search the templates directory for .opt files
-    if args.opt_file is None:
+    elif args.opt_file is None:
         opt_files = [f for f in os.listdir('templates') if os.path.isfile(os.path.join('templates', f)) and f.endswith('.opt')]
     else:
         opt_files = [args.opt_file]
