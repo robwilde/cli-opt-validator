@@ -3,6 +3,7 @@ import subprocess
 import os
 from colorama import init, Fore
 
+
 def main():
     # Initialize colorama
     init()
@@ -58,6 +59,7 @@ def main():
     print(f'Total files validated: {total_files}')
     print(f'Files passed validation: {passed_files}')
     print(f'Files failed validation: {failed_files}')
+
 
 if __name__ == '__main__':
     main()
