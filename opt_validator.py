@@ -42,12 +42,12 @@ def main():
     
     # Loop through the .opt files and validate each one
     for opt_file in opt_files:
-    # Determine the directory to use based on the --folder argument
-    directory = args.folder if args.folder is not None else 'templates'
-    
-    # Run the xmllint command with the specified xsd file
-    # Include the determined directory in the command
-    command = f'xmllint --noout --schema {args.xsd} {directory}/{opt_file}'
+        # Determine the directory to use based on the --folder argument
+        directory = args.folder if args.folder is not None else 'templates'
+        
+        # Run the xmllint command with the specified xsd file
+        # Include the determined directory in the command
+        command = f'xmllint --noout --schema {args.xsd} {directory}/{opt_file}'
         process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = process.communicate()
         
